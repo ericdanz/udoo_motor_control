@@ -12,6 +12,4 @@ void serialEvent();
 //ISR for the serial1 port
 void serialEvent1();
 
-int readSerial1();
-
 #endif

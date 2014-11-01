@@ -2,7 +2,6 @@
 #include "ros.h"
 #include "geometry_msgs/Twist.h"
 
-
 ros::NodeHandle nh;
 
 void velocityMessageHandler(const geometry_msgs::Twist& cmd_vel) {
@@ -44,7 +43,7 @@ void loop() {
   int spd = getSpeed(1);
   // Set the PID input to the speed gotten from the encoders
   PID_input = spd;
-//  Serial.println(spd);
+  //Serial.println(spd);
   
   // Set the speed of the motors to the PID controller output
   setSpeedBoth(PID_output);
@@ -53,4 +52,5 @@ void loop() {
   reported_velocity.linear.x = spd;
   velocityReporter.publish(&reported_velocity);
   nh.spinOnce();
+  delay(20);
 }

@@ -4,7 +4,7 @@ void serialEvent() {
   while (Serial.available() > 0) {
     input = Serial.parseInt();
     delay(10);
-    //PID_target = input;
+    PID_target = input;
     delay(10);
   }
 }
