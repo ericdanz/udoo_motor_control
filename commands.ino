@@ -22,7 +22,7 @@ int getSpeed(int motor) {
   } else {
     sendCommand(GET_SPEED_2);
   }
-  return readSerial1();
+  return convertSpeed(readSerial1());
 }
 
 void setSpeed1(int spd) {
@@ -37,5 +37,12 @@ void setSpeedBoth(int spd) {
   if (currentMode != COMBINED_MOTOR_CONTROL) {
     setMode(COMBINED_MOTOR_CONTROL);
   }
+  // Map output to new range
+  spd = convertSpeed(spd);
   sendCommand(SET_SPEED_1, spd);
+}
+
+// Return speed converted to PID limits
+int convertSpeed(int input) {
+  return map(input, PID_output_lower, PID_output_upper, 0, 255);
 }
