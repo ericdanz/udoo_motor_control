@@ -22,7 +22,7 @@ void setup() {
 
   // turn the PID on
   speedPID.SetMode(AUTOMATIC);
-  speedPID.SetOutputLimits(0, 255);
+  speedPID.SetOutputLimits(PID_output_lower, PID_output_upper);
   speedPID.SetSampleTime(20);
   
   // ros stuff
@@ -43,7 +43,7 @@ void loop() {
   int spd = getSpeed(1);
   // Set the PID input to the speed gotten from the encoders
   PID_input = spd;
-  //Serial.println(spd);
+//  Serial.println(spd);
   
   // Set the speed of the motors to the PID controller output
   setSpeedBoth(PID_output);
