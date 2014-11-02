@@ -8,12 +8,12 @@
 #define WHEEL_DIAMETER 100 // 100mm
 #define SERIAL_BUFFER_LEN 32
 
-int PID_output_lower = -127;
-int PID_output_upper = 127;
+int PID_output_lower = 0;
+int PID_output_upper = 255;
 
-double PID_input = 0;
-double PID_output = 0;
-double PID_target = 0;
+double PID_input = 128;
+double PID_output = 128;
+double PID_target = 128;
 double Kp = 0.1;
 double Ki = 2.0;
 double Kd = 0.01;

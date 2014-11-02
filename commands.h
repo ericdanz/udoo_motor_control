@@ -42,7 +42,7 @@ void sendCommand(char command, char commandArgument);
 void setMode(int mode);
 int getSpeed();
 void setSpeedBoth();
-int convertSpeed(int input);
+int convertSpeed(int inspeed);
 int currentMode;
 
 #endif
