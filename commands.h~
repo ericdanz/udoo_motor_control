@@ -44,7 +44,6 @@ int getSpeed();
 void setSpeedBoth();
 int convertSpeed(int inspeed);
 int currentMode;
-void Turn();
 
 #endif
 

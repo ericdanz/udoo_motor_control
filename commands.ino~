@@ -41,6 +41,8 @@ void setSpeedBoth(int spd) {
   // Map output to new range
   //spd = convertSpeed(spd);
   sendCommand(SET_SPEED_1, spd);
+  
+  
 }
 
 void Turn(int turnAmount) {
@@ -50,6 +52,8 @@ void Turn(int turnAmount) {
   // Map output to new range
   //spd = convertSpeed(spd);
   sendCommand(TURN, turnAmount);
+  
+  
 }
 
 // Return speed converted to PID limits

@@ -95,10 +95,6 @@ void setup() {
 
 
 void loop() {
-	
-  encoder1 = getEncoder(1);
-  encoder2 = getEncoder(2);
-
    if(distanceForward != 0)
 {
    //add the new forward distance to both encoder targets

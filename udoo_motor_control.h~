@@ -12,20 +12,16 @@ int PID_output_lower = 0;
 int PID_output_upper = 255;
 
 
-double PID1_input = 0;
-double PID1_output = 0;
-double PID1_target = 0;
-
-double PID2_input = 0;
-double PID2_output = 0;
-double PID2_target = 0;
+double PID_input = 0;
+double PID_output = 0;
+double PID_target = 0;
 
 double Kp = 0.15;
 double Ki = 0.05;
 double Kd = 0.001;
 
-PID enc1PID(&PID1_input, &PID1_output, &PID1_target, Kp, Ki, Kd, DIRECT);
-PID enc2PID(&PID2_input, &PID2_output, &PID2_target, Kp, Ki, Kd, DIRECT);
+PID encPID(&PID_input, &PID_output, &PID_target, Kp, Ki, Kd, DIRECT);
+
 
 // Contains the serial output
 char serial1_buffer[SERIAL_BUFFER_LEN];
