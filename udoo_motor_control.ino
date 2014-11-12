@@ -29,6 +29,7 @@ void velocityMessageHandler(const geometry_msgs::Twist& cmd_vel) {
   if(cmd_vel.linear.x != 128)
 {
   	spd = cmd_vel.linear.x;
+        //only go for one second
 	setSpeedBoth(spd);
 	
 }
@@ -66,9 +67,13 @@ void setup() {
   Serial1.begin(9600);
 
   // turn the PID on
-  encPID.SetMode(AUTOMATIC);
-  encPID.SetOutputLimits(PID_output_lower, PID_output_upper);
-  encPID.SetSampleTime(20);
+  enc1PID.SetMode(AUTOMATIC);
+  enc1PID.SetOutputLimits(PID_output_lower, PID_output_upper);
+  enc1PID.SetSampleTime(20);
+  
+  enc2PID.SetMode(AUTOMATIC);
+  enc2PID.SetOutputLimits(PID_output_lower, PID_output_upper);
+  enc2PID.SetSampleTime(20);
   
   // ros stuff
   nh.initNode();
@@ -95,7 +100,7 @@ void setup() {
 
 
 void loop() {
-	
+  reported_dist.linear.z = distanceForward;
   encoder1 = getEncoder(1);
   encoder2 = getEncoder(2);
 
@@ -106,6 +111,8 @@ void loop() {
    encoder2target = encoder2 + (distanceForward/mpe);
    //reset distance forward
    distanceForward = 0;
+   PID1_target = encoder1target;
+   PID2_target = encoder2target;
 }
 if(degreesTurn != 0)
 {
@@ -113,10 +120,12 @@ if(degreesTurn != 0)
   encoder1target = encoder1 + (degreesTurn/2)*turnRadiusConstant;
   encoder2target = encoder2 - (degreesTurn/2)*turnRadiusConstant;
   degreesTurn = 0;
+  PID1_target = encoder1target;
+  PID2_target = encoder2target;
 }
    
    // The target speed is set in the subscriber callback
-  
+   
   // Compute the desired output speed to be sent to the motors
   enc1PID.Compute();
   enc2PID.Compute();
@@ -143,7 +152,8 @@ if(degreesTurn != 0)
   // Report the dist on the ROS publisher
   // Change to forward distance and total turns? 
   reported_dist.linear.x = encoder1*mpe;
-  report_dist.linear.y = encoder2*mpe;
+  reported_dist.linear.y = encoder2*mpe;
+  
   distReporter.publish(&reported_dist); 
 
   nh.spinOnce();

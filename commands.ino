@@ -52,6 +52,26 @@ void Turn(int turnAmount) {
   sendCommand(TURN, turnAmount);
 }
 
+void resetEncoders() {
+  sendCommand(RESET_ENCODERS);
+}
+
+long getEncoder(int motor) {
+  if (motor == 1) {
+    sendCommand(GET_ENCODER_1);
+  } else if (motor == 2) {
+    sendCommand(GET_ENCODER_2);
+  }
+  long result;
+  result = readSerial1() << 24;    // (0x00 shifted 24 bits left, effectively * 16777216)
+  result += readSerial1() << 16;   // (0x10 shifted 16 bits left, effectively * 65536)
+  result += readSerial1() << 8;    // (0x56 shifted 8 bits left, effectively * 256)
+  result += readSerial1();         //  (0x32)
+  return result;
+}
+
+
+
 // Return speed converted to PID limits
 int convertSpeed(int inspeed) {
 //  if (inspeed == 0)

@@ -45,6 +45,7 @@ void setSpeedBoth();
 int convertSpeed(int inspeed);
 int currentMode;
 void Turn();
-
+void resetEncoders();
+long getEncoder(int motor);
 #endif
 
